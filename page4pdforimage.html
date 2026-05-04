@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kad Kahwin - PDF / Imej</title>
+    <style>
+        :root {
+            --card-width: 900px;
+            --card-height: 1273px; /* close to A4 ratio */
+            --text-color: #2e2b27;
+            --accent: #8a6d46;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+            color: var(--text-color);
+            background: #f4f0ea;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+        }
+
+        .controls {
+            width: min(100%, var(--card-width));
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 10px;
+            border: 1px solid #e2ddd5;
+        }
+
+        .controls input {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+
+        .controls button {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            cursor: pointer;
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .controls button.secondary {
+            background: #5d6f63;
+        }
+
+        .card-wrapper {
+            width: min(100%, var(--card-width));
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            width: var(--card-width);
+            height: var(--card-height);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.83), rgba(255, 255, 255, 0.83)), url("./assets/background.jpg");
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #ddd;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .content {
+            position: absolute;
+            inset: 55px;
+            border: 2px solid rgba(138, 109, 70, 0.4);
+            border-radius: 10px;
+            padding: 46px 52px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.62);
+        }
+
+        .title {
+            text-align: center;
+            margin: 0 0 8px;
+            letter-spacing: 2px;
+            font-size: 34px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin: 0 0 30px;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        .attendee-box {
+            text-align: center;
+            margin: 10px 0 24px;
+        }
+
+        .attendee-label {
+            margin: 0;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .attendee-name {
+            margin: 6px 0 0;
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #4b3c28;
+            word-break: break-word;
+        }
+
+        .section {
+            text-align: center;
+        }
+
+        .couple {
+            margin: 0;
+            font-size: 44px;
+            line-height: 1.2;
+            color: #6c5130;
+        }
+
+        .details {
+            margin-top: 22px;
+            display: grid;
+            gap: 8px;
+            font-size: 20px;
+            line-height: 1.35;
+        }
+
+        .doa {
+            margin-top: 24px;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.78;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 980px) {
+            :root {
+                --card-width: 360px;
+                --card-height: 509px;
+            }
+
+            .controls {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                inset: 22px;
+                padding: 20px;
+            }
+
+            .title {
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+
+            .subtitle {
+                font-size: 10px;
+                margin-bottom: 14px;
+            }
+
+            .attendee-label {
+                font-size: 10px;
+            }
+
+            .attendee-name {
+                font-size: 22px;
+            }
+
+            .couple {
+                font-size: 30px;
+            }
+
+            .details {
+                font-size: 12px;
+                gap: 4px;
+                margin-top: 12px;
+            }
+
+            .doa {
+                margin-top: 12px;
+                font-size: 10px;
+                line-height: 1.45;
+            }
+
+            .footer {
+                font-size: 9px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .controls {
+                display: none;
+            }
+
+            .card-wrapper {
+                width: 100%;
+            }
+
+            .card {
+                width: 210mm;
+                height: 297mm;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <input id="attendeeInput" type="text" placeholder="Masukkan nama tetamu (contoh: Encik Ahmad)" />
+        <button id="pdfBtn" type="button">Download PDF</button>
+        <button id="imgBtn" class="secondary" type="button">Download Image</button>
+    </div>
+
+    <div class="card-wrapper">
+        <section class="card" id="inviteCard">
+            <div class="content">
+                <div>
+                    <h1 class="title">MAJLIS PERKAHWINAN</h1>
+                    <p class="subtitle">Dengan penuh kesyukuran, kami menjemput anda ke majlis kami</p>
+
+                    <div class="attendee-box">
+                        <p class="attendee-label">Khas Buat</p>
+                        <h2 class="attendee-name" id="attendeeName">Tetamu Dihormati</h2>
+                    </div>
+
+                    <div class="section">
+                        <p class="couple" id="coupleNames">Pengantin Lelaki &amp; Pengantin Perempuan</p>
+                        <div class="details">
+                            <div id="majlisDate">Tarikh: 20 Disember 2026 (Ahad)</div>
+                            <div id="majlisTime">Masa: 11:00 AM - 4:00 PM</div>
+                            <div id="majlisVenue">Tempat: Rumah Jangkang</div>
+                        </div>
+                    </div>
+
+                    <p class="doa" id="doaText">
+                        Ya Allah, berkatilah majlis ini dan satukanlah hati kedua mempelai dengan kasih sayang,
+                        ketenangan dan rahmat-Mu. Kurniakanlah kebahagiaan yang berpanjangan di dunia dan akhirat.
+                    </p>
+                </div>
+
+                <p class="footer">Terima kasih atas doa dan kehadiran anda.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        function setTextById(id, value) {
+            if (!value) return;
+            var el = document.getElementById(id);
+            if (el) el.textContent = value;
+        }
+
+        function getQueryData() {
+            var q = new URLSearchParams(window.location.search);
+            return {
+                attendee: q.get("attendee"),
+                couple: q.get("couple"),
+                date: q.get("date"),
+                time: q.get("time"),
+                venue: q.get("venue"),
+                doa: q.get("doa")
+            };
+        }
+
+        function applyData(data) {
+            setTextById("attendeeName", data.attendee);
+            setTextById("coupleNames", data.couple);
+            setTextById("majlisDate", data.date ? "Tarikh: " + data.date : "");
+            setTextById("majlisTime", data.time ? "Masa: " + data.time : "");
+            setTextById("majlisVenue", data.venue ? "Tempat: " + data.venue : "");
+            setTextById("doaText", data.doa);
+        }
+
+        function updateAttendeeFromInput() {
+            var input = document.getElementById("attendeeInput");
+            var name = (input.value || "").trim();
+            document.getElementById("attendeeName").textContent = name || "Tetamu Dihormati";
+        }
+
+        async function downloadImage() {
+            var card = document.getElementById("inviteCard");
+            var canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: null });
+            var link = document.createElement("a");
+            var safeName = (document.getElementById("attendeeName").textContent || "tetamu").replace(/\s+/g, "-").toLowerCase();
+            link.download = "kad-kahwin-for-" + safeName + ".png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        }
+
+        document.getElementById("attendeeInput").addEventListener("input", updateAttendeeFromInput);
+        document.getElementById("pdfBtn").addEventListener("click", function () {
+            window.print();
+        });
+        document.getElementById("imgBtn").addEventListener("click", downloadImage);
+
+        var data = getQueryData();
+        applyData(data);
+        if (data.attendee) {
+            document.getElementById("attendeeInput").value = data.attendee;
+        }
+    </script>
+</body>
+</html>
